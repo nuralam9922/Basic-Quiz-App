@@ -45,7 +45,7 @@ The Quiz App project uses the [Trivia API](https://the-trivia-api.com/api/) to f
 
 ## Live Preview
 
-You can view a live demo of the Quiz App project [here](#).
+You can view a live demo of the Quiz App project [here](https://basic-quiz-app-iota.vercel.app/).
 
 ## Credits
 

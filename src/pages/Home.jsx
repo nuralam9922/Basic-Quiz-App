@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import HeroImage from '../assets/hero.png';
 import QuizImage from '../assets/quiz.png';
 import FormImage from '../assets/form.png';
+import ResultImage from '../assets/result.png';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
@@ -63,7 +64,7 @@ function Home() {
 									</div>
 								</div>
 								<div className="bg-white rounded-lg overflow-hidden shadow-md col-span-full">
-									<img src={QuizImage} alt="Quiz Page" className="w-full h-auto object-cover" />
+									<img src={QuizImage} alt="Quiz Page" className="w-full h-auto object" />
 									<div className="p-6">
 										<h3 className="text-xl font-bold mb-2">Quiz Page</h3>
 										<p className="text-gray-700">
@@ -72,7 +73,7 @@ function Home() {
 									</div>
 								</div>
 								<div className="bg-white rounded-lg overflow-hidden shadow-md col-span-full">
-									<img src="/dashboard_image.jpg" alt="Dashboard" className="w-full h-auto object-cover" />
+									<img src={ResultImage} alt="Dashboard" className="w-full h-auto  object-left" />
 									<div className="p-6">
 										<h3 className="text-xl font-bold mb-2">Dashboard</h3>
 										<p className="text-gray-700">
