@@ -55,15 +55,14 @@ function FormPage() {
 			.catch((error) => {
 				console.error('There was a problem with the fetch operation:', error);
 			});
-
-		};
+	};
 
 	return (
 		<div className="min-h-screen relative overflow-hidden font-sans bg-gradient-to-r from-rose-200 via-white to-rose-200 flex flex-col ">
 			<ToastContainer />
 			<section className="min-h-screen w-full  mx-auto bg-white shadow-md overflow-hidden">
 				<div className="px-6 py-8 capitalize">
-					<h1 className="text-2xl font-semibold text-gray-800 mb-4">Quiz Configuration</h1>
+					<h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 mb-4 text-center">Quiz Configuration</h1>
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div className="flex flex-col gap-5">
 							<label htmlFor="numQuestions" className="text-gray-700 font-semibold">
@@ -78,7 +77,7 @@ function FormPage() {
 								type="number"
 								id="numQuestions"
 								name="numQuestions"
-								className="border border-gray-300 rounded-md px-3 py-2"
+								className="border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600"
 							/>
 						</div>
 						<div className="flex flex-col gap-5">
@@ -92,26 +91,10 @@ function FormPage() {
 								type="number"
 								id="time"
 								name="time"
-								className="border border-gray-300 rounded-md px-3 py-2"
+								className="border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600"
 							/>
 						</div>
-						{/* <div className="flex flex-col gap-5">
-							<label htmlFor="category" className="text-gray-700 font-semibold">
-								Select type:
-							</label>
-							<select
-								required
-								onChange={(e) => setType(e.target.value)}
-								value={type} // Use value instead of defaultValue
-								id="category"
-								name="category"
-								className="border border-gray-300 rounded-md px-3 py-2"
-							>
-								<option value="easy">easy</option>
-								<option value="true/false">true/false</option>
-								<option value="multiple">multiple</option>
-							</select>
-						</div> */}
+
 						<div className="flex flex-col gap-5">
 							<label htmlFor="type" className="text-gray-700 font-semibold">
 								Select category:
@@ -121,7 +104,7 @@ function FormPage() {
 								value={category}
 								id="type"
 								name="type"
-								className="border border-gray-300 rounded-md px-3 py-2"
+								className="border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600"
 							>
 								<option value="film_and_tv">film_and_tv</option>
 								<option value="general_knowledge">general_knowledge</option>
@@ -144,7 +127,7 @@ function FormPage() {
 								value={difficulty}
 								id="difficulty"
 								name="difficulty"
-								className="border border-gray-300 rounded-md px-3 py-2"
+								className="border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600"
 							>
 								<option value="easy">easy</option>
 								<option value="medium">Medium</option>

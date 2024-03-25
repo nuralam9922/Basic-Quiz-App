@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { DataProvider } from './context/DataContext';
+import ResultPage from './pages/ResultPage';
 // import Home from './pages/Home';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
 							<Route path="/" element={<Home />} />
 							<Route path="/form" element={<FormPage />} />
 							<Route path="/quiz" element={<Quiz />} />
+							<Route path="/result" element={<ResultPage />} />
 						</Routes>
 					</Suspense>
 				</Router>

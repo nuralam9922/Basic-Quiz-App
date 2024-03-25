@@ -4,22 +4,21 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { Data, DataProvider, useDataProvider } from '../context/DataContext';
 import { useState } from 'react';
 import { useRef } from 'react';
+import Timer from '../components/Timer';
 
 function QuizApp() {
 	const navigate = useNavigate();
-	const { formData, questions } = useDataProvider();
+	// importing the global states form context api
+	const { formData, questions, userAnswer, setUserAnswer } = useDataProvider();
+
 	const [currentQUestion, setCurrentQUestion] = useState();
 	const [questionNumber, setQuestionNumber] = useState(1);
 	const [options, setOptions] = useState([]);
 	const quizProgressRef = useRef(null);
-	const timerRef = useRef(null);
-	const multipleQuestionRefs = useRef([]);
 
 	const progressWidth = quizProgressRef?.current?.clientWidth / formData.totalQuestion;
-	const [timeLeft, setTimeLeft] = useState();
-	const minutes = Math.floor(timeLeft / 60);
-	const seconds = timeLeft % 60;
 
+	// / Check if the form data is not available and redirect to the form page
 	useEffect(() => {
 		if (Object.keys(formData).length === 0) {
 			navigate('/form', { state: { message: 'Fill the form' } });
@@ -31,64 +30,69 @@ function QuizApp() {
 	}, [formData, questions]);
 
 	useEffect(() => {
-		setTimeLeft(formData?.totalTime * 60);
-		const intervalId = setInterval(() => {
-			setTimeLeft((prevTimeLeft) => {
-				if (prevTimeLeft <= 1) {
-					clearInterval(intervalId);
-					console.log('k');
-					return 0; // Ensure it doesn't go negative
-				} else {
-					return prevTimeLeft - 1;
-				}
-			});
-		}, 1000);
-
-		// Clean up the interval to prevent memory leaks
-		return () => clearInterval(intervalId);
-	}, [formData]);
-
-	const handelNextQuestion = () => {
-		if (formData.totalQuestion > questionNumber) {
-			setQuestionNumber((prev) => prev + 1);
-		}
-	};
-
-	useEffect(() => {
 		setCurrentQUestion(questions[questionNumber - 1]);
 		console.log(questionNumber);
 		// setOptions(currentQUestion?.incorrectAnswers.map((item) => item));
 	}, [questionNumber]);
 
-	const multipleQuestion = document.querySelectorAll('.multipleQuestion');
-	// multipleQuestion.map((item) => {
-	// 	item.onClick = () => {
-	// 		alert()
-	// 	}
-	// })
-	useEffect(() => {
-		// Attach click event handlers to each multipleQuestion element
-		multipleQuestionRefs.current.forEach((ref, index) => {
-			ref.addEventListener('click', () => handleAnswerClick(ref));
+	const handelNextQuestion = () => {
+		// reset previous selected box
+		document.querySelectorAll('.multipleQuestion').forEach((item, i) => {
+			item.classList.remove('bg-gray-300');
 		});
 
-		// Clean up the event listeners when the component unmounts
-		return () => {
-			multipleQuestionRefs.current.forEach((ref, index) => {
-				ref.removeEventListener('click', () => handleAnswerClick(ref));
-			});
-		};
-	}, []);
+		if (formData.totalQuestion > questionNumber) {
+			setQuestionNumber((prev) => prev + 1);
+		}
 
-	const handleAnswerClick = (ref) => {
-		multipleQuestionRefs.current.forEach((ref, index) => {
-			ref.style.backgroundColor = ' #FFF';
-		});
-		ref.style.backgroundColor = 'green';
 	};
+
+	const handelPrevQuestion = () => {
+		// reset previous selected box
+		document.querySelectorAll('.multipleQuestion').forEach((item, i) => {
+			item.classList.remove('bg-gray-300');
+		});
+
+		if (1 < questionNumber) {
+			setQuestionNumber((prev) => prev - 1);
+		}
+	};
+
+	const handleAnswerClick = (answer, index) => {
+		// This logic is created to assist me in interacting with ChatGPT.
+		const existingQuestionIndex = userAnswer.findIndex((item) => item?.question === currentQUestion?.question);
+
+		if (existingQuestionIndex !== -1) {
+			setUserAnswer((prev) => {
+				const updatedAnswer = [...prev];
+				updatedAnswer[existingQuestionIndex].userQuestionAnswer = answer;
+				return updatedAnswer;
+			});
+		} else {
+			setUserAnswer((prev) => [
+				...prev,
+				{
+					question: currentQUestion?.question,
+					userQuestionAnswer: answer,
+					correctAnswer: currentQUestion?.correctAnswer,
+				},
+			]);
+		}
+
+		// Update the style of the clicked answer box to indicate selection
+		document.querySelectorAll('.multipleQuestion').forEach((item, i) => {
+			// reset previous selected box
+			item.classList.remove('bg-gray-300');
+			if (i === index) {
+				item.classList.add('bg-gray-300');
+			}
+		});
+	};
+
 	return (
 		<div className="min-h-screen  bg-gradient-to-r from-rose-200 via-white to-rose-200 flex flex-col ">
 			<section className=" w-full mx-auto bg-white shadow-md  overflow-hidden">
+				{/* header section */}
 				<header className="flex flex-col sm:flex-row justify-between items-center bg-[#cb8e89] text-white px-6 py-3">
 					<div className="flex flex-col items-center space-y-2 sm:items-start">
 						<strong>
@@ -99,31 +103,9 @@ function QuizApp() {
 						</div>
 					</div>
 
-					<div className="flex items-center space-x-4 mt-4 md:mt-0">
-						<div className="flex items-center">
-							<span className="mr-1">Time Left:</span>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-6 w-6 mr-1 text-yellow-300"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
-							</svg>
-							<span
-								ref={timerRef}
-								className="font-bold border size-14 flex items-center justify-center rounded-full"
-								style={{
-									backgroundImage: `linear-gradient(to bottom, green ${(timeLeft / (formData?.totalTime * 60)) * 100}%, red ${
-										(timeLeft / (formData?.totalTime * 60)) * 100
-									}%)`,
-								}}
-							>
-								{minutes}:{seconds}
-							</span>
-						</div>
-					</div>
+					{/* timer component */}
+
+					<Timer formData={formData} />
 				</header>
 
 				<div className="px-6 py-8">
@@ -131,42 +113,51 @@ function QuizApp() {
 						<div className="questionText montserrat text-3xl mb-4">{currentQUestion?.question}?</div>
 						<div className="categorySectionTag">
 							<div className="flex flex-wrap gap-2">
-								<span className="px-2 py-1 bg-gray-100 text-gray-800 text-sm rounded-lg">Category: {formData?.category}</span>
-								<span className="px-2 py-1 bg-gray-100 text-gray-800 text-sm rounded-lg">Difficulty: {formData?.difficulty}</span>
-								<span className="px-2 py-1 bg-gray-100 text-gray-800 text-sm rounded-lg">Type: Multiple Choice</span>
-								<span className="px-2 py-1 bg-gray-100 text-gray-800 text-sm rounded-lg">Total Questions: {formData?.totalQuestion}</span>
+								<span className="px-2 py-2 bg-gray-100 text-gray-800 text-sm rounded-lg">Category: {formData?.category}</span>
+								<span className="px-2 py-2 bg-gray-100 text-gray-800 text-sm rounded-lg">Difficulty: {formData?.difficulty}</span>
+								<span className="px-2 py-2 bg-gray-100 text-gray-800 text-sm rounded-lg">Type: Multiple Choice</span>
+								<span className="px-2 py-2 bg-gray-100 text-gray-800 text-sm rounded-lg">Total Questions: {formData?.totalQuestion}</span>
 							</div>
 						</div>
 					</div>
 					<div className="multipleQuestionSection capitalize cursor-pointer flex flex-col gap-4">
 						<div
-							ref={(ref) => (multipleQuestionRefs.current[0] = ref)}
-							className="multipleQuestion flex items-center h-16 rounded-lg overflow-hidden bg-gray-100 hover:bg-gray-200"
+							onClick={(e) => handleAnswerClick(e.currentTarget.dataset.value)}
+							data-value={currentQUestion?.correctAnswer}
+							className={`multipleQuestion flex items-center min-h-20 rounded-lg overflow-hidden bg-gray-100 hover:bg-gray-200`}
 						>
-							<div className="bg-[#cb8e89] h-full flex items-center justify-center w-14 text-white font-bold">A</div>
+							<div className="bg-[#cb8e89] h-full flex items-center justify-center w-14 min-h-20 text-white font-bold">A</div>
 							<p className="flex items-center px-4 w-full">{currentQUestion?.correctAnswer}</p>
 						</div>
-						{currentQUestion?.incorrectAnswers.map((item, index) => (
+						{currentQUestion?.incorrectAnswers.map((options, index) => (
 							<div
-								ref={(ref) => (multipleQuestionRefs.current[index + 1] = ref)}
+								onClick={(e) => {
+									handleAnswerClick(e.currentTarget.dataset.value, index + 1);
+								}}
+								data-value={options}
 								key={index}
-								className="multipleQuestion flex items-center h-16 rounded-lg overflow-hidden bg-gray-100 hover:bg-gray-200"
+								className="multipleQuestion relative flex items-center min-h-20 rounded-lg overflow-hidden bg-gray-100 hover:bg-gray-200"
 							>
-								<div className="bg-[#cb8e89] h-full flex items-center justify-center w-14 text-white font-bold">
+								<div className="bg-[#cb8e89] h-full flex items-center justify-center w-14 min-h-20 text-white font-bold">
 									{String.fromCharCode(65 + index + 1)}
 								</div>
-								<p className="flex items-center px-4 w-full">{item}</p>
+								<p className="flex items-center px-4 w-full">{options}</p>
 							</div>
 						))}
 					</div>
 				</div>
+
+				{/* footer section */}
 				<footer className="flex justify-between px-6 py-4 bg-gray-100">
-					<button className="px-4 py-2 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 focus:outline-none focus:ring">
+					<button
+						onClick={handelPrevQuestion}
+						className="px-4 py-2 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 focus:outline-none focus:ring"
+					>
 						Previous
 					</button>
 					{formData.totalQuestion === questionNumber ? (
 						<button
-							// onClick={handelNextQuestion}
+							onClick={() => navigate('/result')}
 							className="px-4 py-2 bg-[#cb8e89] text-white font-bold rounded-lg hover:bg-[#a35f59] focus:outline-none focus:ring"
 						>
 							Submit

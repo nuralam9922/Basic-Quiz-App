@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 function Navbar({ featureSectionRef, howTOPlaySectionRef }) {
 	const [isMenuOppen, setIsMenuOppen] = useState(false);
-	console.log(featureSectionRef);
 	return (
 		<header className="px-4 lg:px-6 py-4 md:py-6 flex relative items-center justify-between bg-slate-100">
 			<div to="#" className="flex items-center cursor-pointer">
