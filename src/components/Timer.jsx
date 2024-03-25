@@ -2,8 +2,11 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Timer({ formData }) {
+	const navigate = useNavigate();
+
 	const [timeLeft, setTimeLeft] = useState();
 	const timerRef = useRef(null);
 	const minutes = Math.floor(timeLeft / 60);
@@ -15,6 +18,7 @@ function Timer({ formData }) {
 			setTimeLeft((prevTimeLeft) => {
 				if (prevTimeLeft <= 1) {
 					clearInterval(intervalId);
+					navigate('/result');
 					return 0; // Ensure it doesn't go negative
 				} else {
 					return prevTimeLeft - 1;

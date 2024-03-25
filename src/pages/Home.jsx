@@ -35,7 +35,7 @@ function Home() {
 									Get Started
 								</Link>
 								<Link
-									to="#"
+									to="https://github.com/nuralam9922/Basic-Quiz-App"
 									className="w-full flex items-center justify-center h-12 px-6 text-lg font-medium text-gray-900 bg-white border border-gray-200 rounded-md shadow-md hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300"
 								>
 									view source code

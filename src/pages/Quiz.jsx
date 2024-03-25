@@ -18,6 +18,8 @@ function QuizApp() {
 
 	const progressWidth = quizProgressRef?.current?.clientWidth / formData.totalQuestion;
 
+	const [select, setSelect] = useState(true);
+
 	// / Check if the form data is not available and redirect to the form page
 	useEffect(() => {
 		if (Object.keys(formData).length === 0) {
@@ -31,7 +33,7 @@ function QuizApp() {
 
 	useEffect(() => {
 		setCurrentQUestion(questions[questionNumber - 1]);
-		console.log(questionNumber);
+
 		// setOptions(currentQUestion?.incorrectAnswers.map((item) => item));
 	}, [questionNumber]);
 
@@ -41,13 +43,13 @@ function QuizApp() {
 			item.classList.remove('bg-gray-300');
 		});
 
+		setSelect(true);
 		if (formData.totalQuestion > questionNumber) {
 			setQuestionNumber((prev) => prev + 1);
 		}
-
 	};
 
-	const handelPrevQuestion = () => {
+	const handelPrevQuestion = (e) => {
 		// reset previous selected box
 		document.querySelectorAll('.multipleQuestion').forEach((item, i) => {
 			item.classList.remove('bg-gray-300');
@@ -58,6 +60,7 @@ function QuizApp() {
 		}
 	};
 
+	// console.log(select);
 	const handleAnswerClick = (answer, index) => {
 		// This logic is created to assist me in interacting with ChatGPT.
 		const existingQuestionIndex = userAnswer.findIndex((item) => item?.question === currentQUestion?.question);
@@ -78,6 +81,7 @@ function QuizApp() {
 				},
 			]);
 		}
+		setSelect(false);
 
 		// Update the style of the clicked answer box to indicate selection
 		document.querySelectorAll('.multipleQuestion').forEach((item, i) => {
@@ -157,15 +161,21 @@ function QuizApp() {
 					</button>
 					{formData.totalQuestion === questionNumber ? (
 						<button
+							disabled={select}
 							onClick={() => navigate('/result')}
-							className="px-4 py-2 bg-[#cb8e89] text-white font-bold rounded-lg hover:bg-[#a35f59] focus:outline-none focus:ring"
+							className={`px-4 py-2 text-white font-bold rounded-lg focus:outline-none focus:ring ${
+								select ? 'bg-[#dba6a0] cursor-not-allowed' : 'bg-[#cb8e89] hover:bg-[#a35f59]'
+							}`}
 						>
 							Submit
 						</button>
 					) : (
 						<button
 							onClick={handelNextQuestion}
-							className="px-4 py-2 bg-[#cb8e89] text-white font-bold rounded-lg hover:bg-[#a35f59] focus:outline-none focus:ring"
+							disabled={select}
+							className={`px-4 py-2 text-white font-bold rounded-lg focus:outline-none focus:ring ${
+								select ? 'bg-[#dba6a0] cursor-not-allowed' : 'bg-[#cb8e89] hover:bg-[#a35f59]'
+							}`}
 						>
 							Next
 						</button>
