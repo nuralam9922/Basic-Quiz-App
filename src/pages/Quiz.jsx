@@ -5,6 +5,7 @@ import { Data, DataProvider, useDataProvider } from '../context/DataContext';
 import { useState } from 'react';
 import { useRef } from 'react';
 import Timer from '../components/Timer';
+import arrayShuffle from 'array-shuffle';
 
 function QuizApp() {
 	const navigate = useNavigate();
@@ -13,7 +14,7 @@ function QuizApp() {
 
 	const [currentQUestion, setCurrentQUestion] = useState();
 	const [questionNumber, setQuestionNumber] = useState(1);
-	const [options, setOptions] = useState([]);
+	const [optionArr, SetOptionArr] = useState([]);
 	const quizProgressRef = useRef(null);
 
 	const progressWidth = quizProgressRef?.current?.clientWidth / formData.totalQuestion;
@@ -93,6 +94,16 @@ function QuizApp() {
 		});
 	};
 
+	useEffect(() => {
+		if (questions && questions.length > 0) {
+			setCurrentQUestion(questions[questionNumber - 1]);
+
+			// Shuffle the options array for the current question
+			const shuffledOptions = arrayShuffle([...questions[questionNumber - 1].incorrectAnswers, questions[questionNumber - 1].correctAnswer]);
+			SetOptionArr(shuffledOptions);
+		}
+	}, [questionNumber, questions]);
+
 	return (
 		<div className="min-h-screen  bg-gradient-to-r from-rose-200 via-white to-rose-200 flex flex-col ">
 			<section className=" w-full mx-auto bg-white shadow-md  overflow-hidden">
@@ -125,27 +136,17 @@ function QuizApp() {
 						</div>
 					</div>
 					<div className="multipleQuestionSection capitalize cursor-pointer flex flex-col gap-4">
-						<div
-							onClick={(e) => handleAnswerClick(e.currentTarget.dataset.value)}
-							data-value={currentQUestion?.correctAnswer}
-							className={`multipleQuestion flex items-center min-h-20 rounded-lg overflow-hidden bg-gray-100 hover:bg-gray-200`}
-						>
-							<div className="bg-[#cb8e89] h-full flex items-center justify-center w-14 min-h-20 text-white font-bold">A</div>
-							<p className="flex items-center px-4 w-full">{currentQUestion?.correctAnswer}</p>
-						</div>
-						{currentQUestion?.incorrectAnswers.map((options, index) => (
+						{optionArr.map((option, index) => (
 							<div
-								onClick={(e) => {
-									handleAnswerClick(e.currentTarget.dataset.value, index + 1);
-								}}
-								data-value={options}
+								onClick={(e) => handleAnswerClick(e.currentTarget.dataset.value, index)}
+								data-value={option}
 								key={index}
-								className="multipleQuestion relative flex items-center min-h-20 rounded-lg overflow-hidden bg-gray-100 hover:bg-gray-200"
+								className={`multipleQuestion relative flex items-center min-h-20 rounded-lg overflow-hidden bg-gray-100 hover:bg-gray-200`}
 							>
 								<div className="bg-[#cb8e89] h-full flex items-center justify-center w-14 min-h-20 text-white font-bold">
-									{String.fromCharCode(65 + index + 1)}
+									{String.fromCharCode(65 + index)}
 								</div>
-								<p className="flex items-center px-4 w-full">{options}</p>
+								<p className="flex items-center px-4 w-full">{option}</p>
 							</div>
 						))}
 					</div>
