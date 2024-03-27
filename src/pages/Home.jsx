@@ -43,7 +43,7 @@ function Home() {
 								</Link>
 							</div>
 						</div>
-						<div className="flex justify-center lg:justify-end">
+						<div className="flex justify-center lg:justify-end w-full min-h-60">
 							<img src={HeroImage} alt="Hero" className="w-full max-w-lg rounded-xl object-cover object-center" />
 						</div>
 					</div>
@@ -64,7 +64,7 @@ function Home() {
 									</div>
 								</div>
 								<div className="bg-white rounded-lg overflow-hidden shadow-md col-span-full">
-									<img src={QuizImage} alt="Quiz Page" className="w-full h-auto object" />
+									<img src={QuizImage} alt="Quiz Page" className="w-full h-auto min-h-[700px] object" />
 									<div className="p-6">
 										<h3 className="text-xl font-bold mb-2">Quiz Page</h3>
 										<p className="text-gray-700">
@@ -131,7 +131,7 @@ function Home() {
 						</div>
 					</div>
 				</section>
-				<section className="  bg-gray-100 min-h-screen px-4 flex items-center justify-center py-20 md:py-0">
+				<section className="  bg-gray-100 min-h-[30rem] px-4 flex items-center justify-center md:py-0">
 					<div className="container mx-auto ">
 						<h2 className="text-4xl font-bold text-gray-800 mb-14 ">Experience Free & Seamless Quizzing</h2>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
