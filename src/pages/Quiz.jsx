@@ -8,6 +8,9 @@ import Timer from '../components/Timer';
 import arrayShuffle from 'array-shuffle';
 
 function QuizApp() {
+
+	document.title = 'Quiz : Quiz';
+
 	const navigate = useNavigate();
 	// importing the global states form context api
 	const { formData, questions, userAnswer, setUserAnswer } = useDataProvider();

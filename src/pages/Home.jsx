@@ -14,6 +14,8 @@ function Home() {
 	// const [isMenuOppen, SetIsMenuOppen] = useState();
 	const featureSectionRef = useRef(null);
 	const howTOPlaySectionRef = useRef(null);
+
+	document.title = 'Quiz : Home';
 	return (
 		<div className="min-h-screen bg-gray-50 overflow-hidden">
 			<Navbar featureSectionRef={featureSectionRef} howTOPlaySectionRef={howTOPlaySectionRef} />

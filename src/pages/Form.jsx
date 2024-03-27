@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function FormPage() {
+	document.title = 'Quiz : Form';
 	const [totalQuestion, setTotalQuestion] = useState(10);
 	const [totalTime, setTotalTime] = useState(2);
 	const [type, setType] = useState('multiple');
