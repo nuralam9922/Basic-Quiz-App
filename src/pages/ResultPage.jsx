@@ -31,7 +31,7 @@ function ResultPage() {
 
 	return (
 		<div className="min-h-screen bg-gray-100 flex items-center justify-center">
-			<div className="w-full max-w-screen-lg px-4">
+			<div className="w-full max-w-screen-lg ">
 				<div className="bg-white shadow-md rounded-md p-8">
 					<h2 className="text-5xl font-semibold mb-6 text-center text-gray-800">Quiz Result</h2>
 

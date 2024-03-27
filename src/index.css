@@ -7,5 +7,9 @@
 }
 
 .selected {
-     display: block;
+	display: block;
+}
+
+::-webkit-scrollbar {
+	display: none;
 }

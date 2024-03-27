@@ -108,12 +108,12 @@ function QuizApp() {
 		<div className="min-h-screen  bg-gradient-to-r from-rose-200 via-white to-rose-200 flex flex-col ">
 			<section className=" w-full mx-auto bg-white shadow-md  overflow-hidden">
 				{/* header section */}
-				<header className="flex flex-col sm:flex-row justify-between items-center bg-[#cb8e89] text-white px-6 py-3">
-					<div className="flex flex-col items-center space-y-2 sm:items-start">
+				<header className="flex  items-center justify-center gap-5 md:justify-between  bg-[#cb8e89] text-white px-6 py-3">
+					<div className="flex flex-col space-y-2 sm:items-start">
 						<strong>
 							Question {questionNumber}/{formData && formData.totalQuestion && formData.totalQuestion}
 						</strong>
-						<div ref={quizProgressRef} className="w-64 h-2 bg-white rounded-full relative overflow-hidden">
+						<div ref={quizProgressRef} className="w-32 md:w-64 h-2  bg-white rounded-full relative overflow-hidden">
 							<div className="h-full bg-[#e4c9cc] absolute top-0 left-0" style={{ width: `${progressWidth * questionNumber}px` }}></div>
 						</div>
 					</div>
@@ -153,7 +153,7 @@ function QuizApp() {
 				</div>
 
 				{/* footer section */}
-				<footer className="flex justify-between px-6 py-4 bg-gray-100">
+				<footer className="flex justify-between px-6 py-4 mt-10 bg-gray-100">
 					<button
 						onClick={handelPrevQuestion}
 						className="px-4 py-2 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 focus:outline-none focus:ring"
@@ -164,7 +164,7 @@ function QuizApp() {
 						<button
 							disabled={select}
 							onClick={() => navigate('/result')}
-							className={`px-4 py-2 text-white font-bold rounded-lg focus:outline-none focus:ring ${
+							className={`px-4  text-white font-bold rounded-lg focus:outline-none focus:ring ${
 								select ? 'bg-[#dba6a0] cursor-not-allowed' : 'bg-[#cb8e89] hover:bg-[#a35f59]'
 							}`}
 						>
@@ -174,7 +174,7 @@ function QuizApp() {
 						<button
 							onClick={handelNextQuestion}
 							disabled={select}
-							className={`px-4 py-2 text-white font-bold rounded-lg focus:outline-none focus:ring ${
+							className={`px-4  text-white font-bold rounded-lg focus:outline-none focus:ring ${
 								select ? 'bg-[#dba6a0] cursor-not-allowed' : 'bg-[#cb8e89] hover:bg-[#a35f59]'
 							}`}
 						>

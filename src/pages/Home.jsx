@@ -52,10 +52,12 @@ function Home() {
 				<section ref={featureSectionRef} className="py-12 bg-gray-100 px-4">
 					<div className="container mx-auto">
 						<h2 className="text-4xl font-bold tracking-tighter text-gray-900 mb-14">Quiz Features</h2>
-						<div className="flex  gap-8">
+						<div className="flex gap-8">
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 								<div className="bg-white rounded-lg overflow-hidden shadow-md col-span-full">
-									<img src={FormImage} alt="Quiz Form" className="w-full h-auto object-cover" />
+									<div className="w-full min-h-[10rem] lg:min-h-[700px]">
+										<img src={FormImage} alt="Quiz Form" className="w-full h-full  object-fill" />
+									</div>
 									<div className="p-6">
 										<h3 className="text-xl font-bold mb-2">Quiz Form</h3>
 										<p className="text-gray-700">
@@ -64,7 +66,9 @@ function Home() {
 									</div>
 								</div>
 								<div className="bg-white rounded-lg overflow-hidden shadow-md col-span-full">
-									<img src={QuizImage} alt="Quiz Page" className="w-full h-auto min-h-[700px] object" />
+									<div className="w-full min-h-[10rem] lg:min-h-[500px]">
+										<img src={QuizImage} alt="Quiz Form" className="w-full h-full  object-cover" />
+									</div>
 									<div className="p-6">
 										<h3 className="text-xl font-bold mb-2">Quiz Page</h3>
 										<p className="text-gray-700">
@@ -73,7 +77,9 @@ function Home() {
 									</div>
 								</div>
 								<div className="bg-white rounded-lg overflow-hidden shadow-md col-span-full">
-									<img src={ResultImage} alt="Dashboard" className="w-full h-auto  object-left" />
+									<div className="w-full min-h-[10rem] lg:min-h-[700px]">
+										<img src={ResultImage} alt="Quiz Form" className="w-full h-full  object-fill" />
+									</div>
 									<div className="p-6">
 										<h3 className="text-xl font-bold mb-2">Dashboard</h3>
 										<p className="text-gray-700">
@@ -131,7 +137,7 @@ function Home() {
 						</div>
 					</div>
 				</section>
-				<section className="  bg-gray-100 min-h-[30rem] px-4 flex items-center justify-center md:py-0">
+				<section className="  min-h-[30rem] px-4 flex items-center justify-center ">
 					<div className="container mx-auto ">
 						<h2 className="text-4xl font-bold text-gray-800 mb-14 ">Experience Free & Seamless Quizzing</h2>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">

@@ -9,10 +9,10 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function FormPage() {
-	const [totalQuestion, setTotalQuestion] = useState(5);
-	const [totalTime, setTotalTime] = useState(5);
+	const [totalQuestion, setTotalQuestion] = useState(10);
+	const [totalTime, setTotalTime] = useState(2);
 	const [type, setType] = useState('multiple');
-	const [category, setCategory] = useState('film_and_tv');
+	const [category, setCategory] = useState('general_knowledge');
 	const [difficulty, setDifficulty] = useState('easy');
 
 	const { formData, setFormData, setQuestions } = useDataProvider();
@@ -66,7 +66,7 @@ function FormPage() {
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div className="flex flex-col gap-5">
 							<label htmlFor="numQuestions" className="text-gray-700 font-semibold">
-								Number of Questions [1-30]:
+								Number of Questions [1-20]:
 							</label>
 							<input
 								required
@@ -134,7 +134,7 @@ function FormPage() {
 								<option value="hard">Hard</option>
 							</select>
 						</div>
-						<div className="flex justify-between w-full">
+						<div className="flex justify-between w-full pt-10">
 							<Link to={'/'}>
 								<button
 									type="button"
