@@ -17,21 +17,27 @@ function ResultPage() {
 
 	// Calculate the score
 	const calculateScore = () => {
-		// Your logic to calculate the score based on user answers and correct answers
-		// const score = formData?.totalQuestion / userAnswer
+
 		let score = 0;
-		questions.forEach((question, index) => {
-			if (userAnswer[index]?.userQuestionAnswer === question.correctAnswer) {
+		//  questions.forEach((question, index) => {
+		// 	 if (userAnswer[index]?.userQuestionAnswer === question.correctAnswer) {
+		// 		 console.log(questions?.length);
+		//  		score = score + 1;
+		//  	}
+		//  });
+
+		userAnswer.map((answer) => {
+			if (answer.userQuestionAnswer === answer.correctAnswer) {
+				console.log(questions?.length);
 				score = score + 1;
 			}
 		});
 		return (score / questions?.length) * 100;
-		console.log(score);
 	};
 
 	return (
-		<div className="min-h-screen  bg-gray-100 flex items-center justify-center">
-			<div className="w-full  ">
+		<div className="min-h-screen bg-gray-100 flex items-center justify-center">
+			<div className="w-full ">
 				<div className="bg-white shadow-md rounded-md p-8">
 					<h2 className="text-5xl font-semibold mb-6 text-center text-gray-800">Quiz Result</h2>
 

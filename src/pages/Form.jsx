@@ -16,7 +16,7 @@ function FormPage() {
 	const [category, setCategory] = useState('general_knowledge');
 	const [difficulty, setDifficulty] = useState('easy');
 
-	const { formData, setFormData, setQuestions } = useDataProvider();
+	const { formData, setFormData, setUserAnswer, setQuestions } = useDataProvider();
 	const { state } = useLocation();
 	const navigate = useNavigate();
 
@@ -25,6 +25,14 @@ function FormPage() {
 	useEffect(() => {
 		toast.error(state?.message);
 	}, [state]);
+
+
+	// reseating  previous data
+	useEffect(() => {
+		setFormData({});
+		setUserAnswer([]);
+		setQuestions([]);
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
