@@ -8,8 +8,7 @@ import Timer from '../components/Timer';
 import arrayShuffle from 'array-shuffle';
 
 function QuizApp() {
-
-	document.title = 'Quiz : Quiz';
+	document.title = 'Quiz : Quiz Page';
 
 	const navigate = useNavigate();
 	// importing the global states form context api
@@ -107,6 +106,7 @@ function QuizApp() {
 		}
 	}, [questionNumber, questions]);
 
+
 	return (
 		<div className="min-h-screen  bg-gradient-to-r from-rose-200 via-white to-rose-200 flex flex-col ">
 			<section className=" w-full mx-auto bg-white shadow-md  overflow-hidden">
@@ -163,7 +163,7 @@ function QuizApp() {
 					>
 						Previous
 					</button>
-					{formData.totalQuestion === questionNumber ? (
+					{+formData.totalQuestion === questionNumber ? (
 						<button
 							disabled={select}
 							onClick={() => navigate('/result')}
