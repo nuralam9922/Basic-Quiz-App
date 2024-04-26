@@ -17,13 +17,13 @@ function Home() {
 
 	document.title = 'Quiz : Home';
 	return (
-		<div className="min-h-screen bg-gray-50 overflow-hidden">
+		<div className="min-h-screen bg-gray-50 overflow-hidden ">
 			<Navbar featureSectionRef={featureSectionRef} howTOPlaySectionRef={howTOPlaySectionRef} />
 
-			<main className="flex-1">
+			<main className="flex-1 ">
 				<section className="w-full bg-gray-100 px-4 py-16 lg:py-0">
-					<div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-						<div className="flex flex-col justify-center lg:justify-start gap-5">
+					<div className=" mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+						<div className="flex flex-col justify-center lg:justify-start gap-20">
 							<div className="text-center md:text-left mt-20">
 								<h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl text-gray-900">Ready to take the Quiz?</h1>
 								<p className="max-w-lg mt-5 text-lg text-gray-700">
@@ -52,7 +52,7 @@ function Home() {
 				</section>
 
 				<section ref={featureSectionRef} className="py-12 bg-gray-100 px-4">
-					<div className="container mx-auto">
+					<div className=" mx-auto">
 						<h2 className="text-4xl font-bold tracking-tighter text-gray-900 mb-14">Quiz Features</h2>
 						<div className="flex gap-8">
 							<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -95,7 +95,7 @@ function Home() {
 				</section>
 
 				<section ref={howTOPlaySectionRef} className="py-12 md:py-24 lg:py-32 bg-white px-5 flex items-center justify-center">
-					<div className="container mx-auto">
+					<div className=" mx-auto">
 						<h2 className="text-4xl font-bold tracking-tighter text-gray-900 mb-14">How to Play Quiz</h2>
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 							<div className="flex items-start mb-8">
@@ -140,7 +140,7 @@ function Home() {
 					</div>
 				</section>
 				<section className="  min-h-[30rem] px-4 flex items-center justify-center ">
-					<div className="container mx-auto ">
+					<div className=" mx-auto ">
 						<h2 className="text-4xl font-bold text-gray-800 mb-14 ">Experience Free & Seamless Quizzing</h2>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
 							<div className="bg-white rounded-lg overflow-hidden shadow-md p-6">
